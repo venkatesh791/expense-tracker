@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import api from '../utils/api';
 import { useToast } from '../context/ToastContext';
 import { z } from 'zod';
-import { ArrowLeft, Mail, RefreshCw, AlertCircle, Wallet, CheckCircle, Sparkles, LineChart } from 'lucide-react';
+import { ArrowLeft, Mail, RefreshCw, AlertCircle, Wallet, CheckCircle, Sparkles, LineChart, Zap } from 'lucide-react';
 
 const forgotPasswordSchema = z.object({
   email: z.string().min(1, { message: 'Email address is required' }).email({ message: 'Invalid email address' }),
@@ -52,58 +52,77 @@ const ForgotPassword = ({ onNavigateToLogin }) => {
     <div className="min-h-screen flex flex-col md:flex-row bg-slate-50 dark:bg-darkBg text-slate-800 dark:text-slate-100 transition-colors duration-300">
       
       {/* Left side: Value of the app (Desktop only) */}
-      <div className="hidden md:flex md:w-1/2 bg-slate-900 text-slate-100 p-16 flex-col justify-between border-r border-slate-800">
-        <div>
-          <div className="flex items-center space-x-3 mb-12">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
+      <div className="hidden md:flex md:w-3/5 bg-gradient-to-tr from-[#022c22] via-[#0f172a] to-[#0f766e] text-slate-100 p-16 flex-col justify-between relative overflow-hidden">
+        {/* SVG Noise/Grain Overlay */}
+        <svg className="absolute inset-0 w-full h-full object-cover opacity-[0.16] pointer-events-none mix-blend-overlay" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <filter id="noiseFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/>
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+        </svg>
+
+        <div className="relative z-10">
+          <div className="flex items-center space-x-3 mb-16 animate-fadeIn">
+            <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white">
               <Wallet size={20} />
             </div>
             <span className="font-extrabold text-xl tracking-tight">Expense Tracker</span>
           </div>
 
-          <div className="space-y-8 max-w-lg mt-12">
-            <h1 className="text-4xl font-extrabold tracking-tight leading-tight">
-              Regain access to your financial cockpit.
+          <div className="space-y-6 max-w-xl">
+            <span className="inline-block px-3 py-1 bg-white/10 backdrop-blur-md border border-white/15 rounded-full text-[10px] font-bold uppercase tracking-wider text-slate-200">
+              Personal Workspace Platform
+            </span>
+
+            <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+              Finance that moves <br />
+              at the <span className="underline decoration-[#0d9488] decoration-wavy decoration-2 underline-offset-4">speed of life</span>.
             </h1>
-            <p className="text-slate-400 text-sm font-medium leading-relaxed">
-              Enter your email address and we'll immediately dispatch simulation OTP codes and recovery routes so you can reset your credentials safely.
+            <p className="text-slate-300 text-sm font-medium leading-relaxed max-w-md">
+              Track transaction pipelines, coordinate category budgets, and optimize savings in a glass-morphic visual workspace.
             </p>
-
-            <div className="space-y-4 pt-6">
-              <div className="flex items-start space-x-3">
-                <CheckCircle size={18} className="text-success mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-bold">Comprehensive Tracking</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">Quickly document incomes and expenses in any major currency.</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-3">
-                <LineChart size={18} className="text-primary mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-bold">Solid Analytics Insights</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">Evaluate monthly cash distribution with flat, high-contrast trend charts.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-3">
-                <Sparkles size={18} className="text-warning mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-bold">Category Spending Boundaries</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">Define category limit gauges and receive real-time warnings when thresholds are hit.</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
-        <div className="text-xs text-slate-500 font-medium">
-          © 2026 Expense Tracker. Security and Privacy First.
+        {/* Bottom Cards: Horizontal list */}
+        <div className="relative z-10 flex gap-4 mt-12">
+          {/* Card 1 */}
+          <div className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex items-start space-x-3">
+            <div className="p-2 rounded-lg bg-white/10 border border-white/15 text-primary-light flex-shrink-0">
+              <LineChart size={16} />
+            </div>
+            <div>
+              <h4 className="text-xs font-bold text-white">Visual Tracker</h4>
+              <p className="text-[10px] text-slate-400 mt-1 leading-normal">Cash flow charts representing details.</p>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex items-start space-x-3">
+            <div className="p-2 rounded-lg bg-white/10 border border-white/15 text-warning-light flex-shrink-0">
+              <Sparkles size={16} />
+            </div>
+            <div>
+              <h4 className="text-xs font-bold text-white">Smart Limits</h4>
+              <p className="text-[10px] text-slate-400 mt-1 leading-normal">Configure category boundaries easily.</p>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex items-start space-x-3">
+            <div className="p-2 rounded-lg bg-white/10 border border-white/15 text-success-light flex-shrink-0">
+              <Zap size={16} />
+            </div>
+            <div>
+              <h4 className="text-xs font-bold text-white">AI Insights</h4>
+              <p className="text-[10px] text-slate-400 mt-1 leading-normal">Automated tips and alerts generated.</p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Right side: Forgot Password Form */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-8 bg-white dark:bg-darkCard transition-colors">
+      <div className="w-full md:w-2/5 flex items-center justify-center p-8 bg-white dark:bg-darkCard transition-colors">
         <div className="w-full max-w-md space-y-6">
           <div className="flex justify-between items-center mb-2">
             <button
