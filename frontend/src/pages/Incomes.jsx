@@ -121,7 +121,7 @@ const Incomes = () => {
       {/* Top action header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h3 className="text-xl font-bold tracking-tight">Income Management</h3>
+          <h3 className="font-display text-xl font-extrabold tracking-tight text-slate-800 dark:text-white">Income Management</h3>
           <p className="text-xs text-slate-400 dark:text-slate-500 font-medium">Record and track your earnings</p>
         </div>
         <button

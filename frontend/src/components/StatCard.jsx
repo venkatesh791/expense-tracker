@@ -20,10 +20,10 @@ const StatCard = ({ title, value, icon: Icon, description, trend, trendType, loa
     <div className="rounded-2xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder transition-colors relative overflow-hidden group fade-in">
       <div className="flex justify-between items-start">
         <div>
-          <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
+          <span className="font-display text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">
             {title}
           </span>
-          <h3 className="text-2xl md:text-3xl font-extrabold text-slate-800 dark:text-white tracking-tight">
+          <h3 className="font-display text-2xl md:text-3xl font-black text-slate-800 dark:text-white tracking-tight">
             {value}
           </h3>
         </div>

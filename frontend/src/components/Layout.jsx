@@ -48,8 +48,11 @@ const Layout = ({ children, activePage, setActivePage }) => {
             <Wallet size={20} className="text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-lg leading-tight tracking-tight">Expense Tracker</h1>
-            <p className="text-xs text-slate-400 dark:text-slate-500 font-medium">Workspace</p>
+            <div className="flex items-baseline">
+              <span className="font-display font-black text-sm tracking-tight text-slate-800 dark:text-white">Expense</span>
+              <span className="font-display font-medium text-sm tracking-normal text-primary ml-1">Tracker</span>
+            </div>
+            <p className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider mt-0.5">Workspace</p>
           </div>
         </div>
 
@@ -104,7 +107,10 @@ const Layout = ({ children, activePage, setActivePage }) => {
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-extrabold text-sm">
             <Wallet size={16} className="text-white" />
           </div>
-          <span className="font-extrabold text-md tracking-tight">Expense Tracker</span>
+          <div className="flex items-baseline">
+            <span className="font-display font-black text-sm tracking-tight text-slate-800 dark:text-white">Expense</span>
+            <span className="font-display font-medium text-sm tracking-normal text-primary ml-1">Tracker</span>
+          </div>
         </div>
         
         <div className="flex items-center space-x-3">
@@ -126,7 +132,7 @@ const Layout = ({ children, activePage, setActivePage }) => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-100 dark:border-darkBorder">
-              <span className="font-extrabold text-lg">Menu</span>
+              <span className="font-display font-bold text-lg">Menu</span>
               <button onClick={() => setMobileMenuOpen(false)} className="p-1">
                 <X size={20} />
               </button>
@@ -174,7 +180,7 @@ const Layout = ({ children, activePage, setActivePage }) => {
         {/* Top Header for Desktop */}
         <header className="hidden md:flex items-center justify-between px-8 py-4 bg-white dark:bg-darkCard border-b border-slate-200 dark:border-darkBorder flex-shrink-0">
           <div>
-            <h2 className="text-xl font-bold capitalize tracking-tight">{activePage}</h2>
+            <h2 className="font-display text-xl font-bold capitalize tracking-tight">{activePage}</h2>
             <p className="text-xs text-slate-400 dark:text-slate-500 font-medium">
               Welcome back, {user?.name || 'User'}! Keep tracking your financial goals.
             </p>

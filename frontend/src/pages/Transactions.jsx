@@ -165,7 +165,7 @@ const Transactions = () => {
       {/* Top Header & Export Buttons */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h3 className="text-xl font-bold tracking-tight">Transaction History</h3>
+          <h3 className="font-display text-xl font-extrabold tracking-tight text-slate-800 dark:text-white">Transaction History</h3>
           <p className="text-xs text-slate-400 dark:text-slate-500 font-medium font-sans">Full ledger of incomes and expenses</p>
         </div>
 

@@ -76,7 +76,7 @@ const Analytics = () => {
       {/* Top filter action bar */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h3 className="text-xl font-bold tracking-tight">Analytics & Reports</h3>
+          <h3 className="font-display text-xl font-extrabold tracking-tight text-slate-800 dark:text-white">Analytics & Reports</h3>
           <p className="text-xs text-slate-400 dark:text-slate-500 font-medium font-sans">Visual charts representing financial health</p>
         </div>
 

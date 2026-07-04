@@ -131,7 +131,7 @@ const Dashboard = ({ setActivePage }) => {
         <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center mb-4">
-              <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider">
+              <h4 className="font-display font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider">
                 Monthly Budget Gauge
               </h4>
               <span className="text-xs text-slate-400 dark:text-slate-500 flex items-center gap-1 font-semibold">
@@ -193,7 +193,7 @@ const Dashboard = ({ setActivePage }) => {
         <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder lg:col-span-2 flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center mb-6">
-              <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider flex items-center gap-1.5">
+              <h4 className="font-display font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider flex items-center gap-1.5">
                 <Zap size={16} className="text-warning fill-warning/20" />
                 Smart AI Insights
               </h4>
@@ -242,7 +242,7 @@ const Dashboard = ({ setActivePage }) => {
       <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider">
+            <h4 className="font-display font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider">
               Recent Transactions
             </h4>
             <p className="text-xs text-slate-400 dark:text-slate-500 font-medium">Your latest financial postings</p>

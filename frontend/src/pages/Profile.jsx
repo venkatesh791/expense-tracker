@@ -91,7 +91,7 @@ const Profile = () => {
   return (
     <div className="space-y-8 animate-fadeIn max-w-4xl mx-auto">
       <div>
-        <h3 className="text-xl font-bold tracking-tight">Account Settings</h3>
+        <h3 className="font-display text-xl font-extrabold tracking-tight text-slate-800 dark:text-white">Account Settings</h3>
         <p className="text-xs text-slate-400 dark:text-slate-500 font-medium font-sans">Manage preferences and profile details</p>
       </div>
 

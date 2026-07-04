@@ -33,7 +33,8 @@ export default {
         darkBorder: '#334155',
       },
       fontFamily: {
-        sans: ['Inter', 'Outfit', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'sans-serif'],
       },
     },
   },

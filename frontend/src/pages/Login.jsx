@@ -63,9 +63,9 @@ const Login = ({ onNavigateToRegister, onNavigateToForgot }) => {
     <div className="min-h-screen flex flex-col md:flex-row bg-slate-50 dark:bg-darkBg text-slate-800 dark:text-slate-100 transition-colors duration-300">
       
       {/* Left side: Value of the app (Desktop only) */}
-      <div className="hidden md:flex md:w-3/5 bg-gradient-to-tr from-[#022c22] via-[#0f172a] to-[#0f766e] text-slate-100 p-16 flex-col justify-between relative overflow-hidden">
+      <div className="hidden md:flex md:w-3/5 bg-gradient-to-tr from-[#7abfc6] via-[#9edde3] to-[#c7f3f6] text-[#0f2942] p-16 flex-col justify-between relative overflow-hidden">
         {/* SVG Noise/Grain Overlay */}
-        <svg className="absolute inset-0 w-full h-full object-cover opacity-[0.16] pointer-events-none mix-blend-overlay" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <svg className="absolute inset-0 w-full h-full object-cover opacity-[0.22] pointer-events-none mix-blend-overlay" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <filter id="noiseFilter">
             <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/>
           </filter>
@@ -74,22 +74,25 @@ const Login = ({ onNavigateToRegister, onNavigateToForgot }) => {
 
         <div className="relative z-10">
           <div className="flex items-center space-x-3 mb-16 animate-fadeIn">
-            <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white">
+            <div className="w-10 h-10 rounded-xl bg-[#0097b2] flex items-center justify-center text-white shadow-sm">
               <Wallet size={20} />
             </div>
-            <span className="font-extrabold text-xl tracking-tight">Expense Tracker</span>
+            <div className="flex items-baseline">
+              <span className="font-display font-black text-2xl tracking-tight text-[#0f2942]">Expense</span>
+              <span className="font-display font-medium text-2xl tracking-normal text-[#0097b2] ml-1">Tracker</span>
+            </div>
           </div>
 
           <div className="space-y-6 max-w-xl">
-            <span className="inline-block px-3 py-1 bg-white/10 backdrop-blur-md border border-white/15 rounded-full text-[10px] font-bold uppercase tracking-wider text-slate-200">
+            <span className="inline-block px-3 py-1 bg-white/35 backdrop-blur-md border border-white/20 rounded-full text-[10px] font-bold uppercase tracking-wider text-[#0f2942]">
               Personal Workspace Platform
             </span>
 
-            <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+            <h1 className="font-display text-4xl lg:text-5xl font-black tracking-tight leading-tight text-[#0f2942]">
               Finance that moves <br />
-              at the <span className="underline decoration-[#0d9488] decoration-wavy decoration-2 underline-offset-4">speed of life</span>.
+              at the speed of life.
             </h1>
-            <p className="text-slate-300 text-sm font-medium leading-relaxed max-w-md">
+            <p className="text-[#334e68] text-sm font-semibold leading-relaxed max-w-md">
               Track transaction pipelines, coordinate category budgets, and optimize savings in a glass-morphic visual workspace.
             </p>
           </div>
@@ -98,35 +101,35 @@ const Login = ({ onNavigateToRegister, onNavigateToForgot }) => {
         {/* Bottom Cards: Horizontal list */}
         <div className="relative z-10 flex gap-4 mt-12">
           {/* Card 1 */}
-          <div className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex items-start space-x-3">
-            <div className="p-2 rounded-lg bg-white/10 border border-white/15 text-primary-light flex-shrink-0">
+          <div className="flex-1 bg-white/30 backdrop-blur-md border border-white/45 rounded-2xl p-4 flex items-start space-x-3">
+            <div className="p-2 rounded-lg bg-white/45 border border-white/30 text-[#0f2942] flex-shrink-0">
               <LineChart size={16} />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-white">Visual Tracker</h4>
-              <p className="text-[10px] text-slate-400 mt-1 leading-normal">Cash flow charts representing details.</p>
+              <h4 className="font-display text-xs font-extrabold text-[#0f2942]">Visual Tracker</h4>
+              <p className="text-[10px] text-[#334e68] mt-1 leading-normal font-semibold">Cash flow charts representing details.</p>
             </div>
           </div>
 
           {/* Card 2 */}
-          <div className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex items-start space-x-3">
-            <div className="p-2 rounded-lg bg-white/10 border border-white/15 text-warning-light flex-shrink-0">
+          <div className="flex-1 bg-white/30 backdrop-blur-md border border-white/45 rounded-2xl p-4 flex items-start space-x-3">
+            <div className="p-2 rounded-lg bg-white/45 border border-white/30 text-[#0f2942] flex-shrink-0">
               <Sparkles size={16} />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-white">Smart Limits</h4>
-              <p className="text-[10px] text-slate-400 mt-1 leading-normal">Configure category boundaries easily.</p>
+              <h4 className="font-display text-xs font-extrabold text-[#0f2942]">Smart Limits</h4>
+              <p className="text-[10px] text-[#334e68] mt-1 leading-normal font-semibold">Configure category boundaries easily.</p>
             </div>
           </div>
 
           {/* Card 3 */}
-          <div className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex items-start space-x-3">
-            <div className="p-2 rounded-lg bg-white/10 border border-white/15 text-success-light flex-shrink-0">
+          <div className="flex-1 bg-white/30 backdrop-blur-md border border-white/45 rounded-2xl p-4 flex items-start space-x-3">
+            <div className="p-2 rounded-lg bg-white/45 border border-white/30 text-[#0f2942] flex-shrink-0">
               <Zap size={16} />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-white">AI Insights</h4>
-              <p className="text-[10px] text-slate-400 mt-1 leading-normal">Automated tips and alerts generated.</p>
+              <h4 className="font-display text-xs font-extrabold text-[#0f2942]">AI Insights</h4>
+              <p className="text-[10px] text-[#334e68] mt-1 leading-normal font-semibold">Automated tips and alerts generated.</p>
             </div>
           </div>
         </div>
@@ -136,10 +139,10 @@ const Login = ({ onNavigateToRegister, onNavigateToForgot }) => {
       <div className="w-full md:w-2/5 flex items-center justify-center p-8 bg-white dark:bg-darkCard transition-colors">
         <div className="w-full max-w-md space-y-6">
           <div className="flex flex-col items-center md:items-start space-y-2 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-white mb-2 md:hidden">
+            <div className="w-12 h-12 rounded-xl bg-[#0097b2] flex items-center justify-center text-white mb-2 md:hidden">
               <Wallet size={24} />
             </div>
-            <h2 className="text-3xl font-extrabold tracking-tight">Welcome Back</h2>
+            <h2 className="font-display text-3xl font-extrabold tracking-tight">Welcome Back</h2>
             <p className="text-xs text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">
               Enter credentials to access workspace
             </p>
@@ -164,7 +167,7 @@ const Login = ({ onNavigateToRegister, onNavigateToForgot }) => {
                   placeholder="you@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 dark:border-darkBorder bg-transparent focus:border-primary focus:outline-none text-sm font-semibold transition-colors"
+                  className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 dark:border-darkBorder bg-transparent focus:border-[#0097b2] focus:outline-none text-sm font-semibold transition-colors"
                 />
               </div>
             </div>
@@ -177,7 +180,7 @@ const Login = ({ onNavigateToRegister, onNavigateToForgot }) => {
                 <button
                   type="button"
                   onClick={onNavigateToForgot}
-                  className="text-xs font-bold text-primary hover:text-primary-dark transition-colors"
+                  className="text-xs font-bold text-[#0097b2] hover:text-[#008199] transition-colors"
                 >
                   Forgot Password?
                 </button>
@@ -190,7 +193,7 @@ const Login = ({ onNavigateToRegister, onNavigateToForgot }) => {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-11 pr-11 py-3 rounded-xl border border-slate-200 dark:border-darkBorder bg-transparent focus:border-primary focus:outline-none text-sm font-semibold transition-colors"
+                  className="w-full pl-11 pr-11 py-3 rounded-xl border border-slate-200 dark:border-darkBorder bg-transparent focus:border-[#0097b2] focus:outline-none text-sm font-semibold transition-colors"
                 />
                 <button
                   type="button"
@@ -205,7 +208,7 @@ const Login = ({ onNavigateToRegister, onNavigateToForgot }) => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 bg-primary text-white rounded-xl font-bold hover:bg-primary-dark transition-all flex items-center justify-center space-x-2"
+              className="w-full py-3.5 bg-[#0097b2] hover:bg-[#008199] text-white rounded-xl font-bold transition-all flex items-center justify-center space-x-2"
             >
               <span>{loading ? 'Signing In...' : 'Sign In'}</span>
               {!loading && <ArrowRight size={16} />}
@@ -230,7 +233,7 @@ const Login = ({ onNavigateToRegister, onNavigateToForgot }) => {
             <span className="text-slate-400 dark:text-slate-500 font-semibold">Don't have an account? </span>
             <button
               onClick={onNavigateToRegister}
-              className="font-bold text-primary hover:text-primary-dark transition-colors"
+              className="font-bold text-[#0097b2] hover:text-[#008199] transition-colors"
             >
               Sign Up Free
             </button>
