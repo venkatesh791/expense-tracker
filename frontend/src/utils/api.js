@@ -1,7 +1,19 @@
 import axios from 'axios';
 
+let baseURL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5001/api');
+
+// Clean up baseURL to ensure it always ends with /api
+if (baseURL && baseURL.startsWith('http')) {
+  // Remove any trailing slashes
+  baseURL = baseURL.replace(/\/+$/, '');
+  // Append /api if not present
+  if (!baseURL.endsWith('/api')) {
+    baseURL = `${baseURL}/api`;
+  }
+}
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5001/api'),
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
   },
