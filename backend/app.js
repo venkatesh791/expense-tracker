@@ -10,13 +10,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Log requests in development
-if (process.env.NODE_ENV === 'development') {
-  app.use((req, res, next) => {
-    console.log(`${req.method} ${req.originalUrl}`);
-    next();
+// Request logging middleware
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on('finish', () => {
+    const duration = Date.now() - start;
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl} ${res.statusCode} - ${duration}ms`);
   });
-}
+  next();
+});
 
 // API Routes
 app.use('/api/auth', require('./routes/authRoutes'));
