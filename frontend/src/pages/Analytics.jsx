@@ -49,7 +49,7 @@ const Analytics = () => {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white dark:bg-darkCard p-3 border border-slate-200 dark:border-darkBorder rounded-xl shadow-lg text-xs font-semibold glass">
+        <div className="bg-white dark:bg-darkCard p-3 border border-slate-200 dark:border-darkBorder rounded-xl text-xs font-semibold bg-white dark:bg-darkCard">
           <p className="mb-1 text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">{label}</p>
           {payload.map((entry, idx) => (
             <p key={idx} style={{ color: entry.color }} className="flex justify-between items-center gap-4 py-0.5">
@@ -65,8 +65,8 @@ const Analytics = () => {
 
   const getActiveFilterClass = (currentRange) => {
     return range === currentRange
-      ? 'bg-primary text-white shadow-md shadow-primary/20'
-      : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-800 dark:hover:text-slate-200';
+      ? 'bg-primary text-white border border-primary-dark'
+      : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-800 dark:hover:text-slate-200 border border-transparent';
   };
 
   const hasTrendData = analyticsData.monthlyTrend && analyticsData.monthlyTrend.some(item => item.income > 0 || item.expense > 0);
@@ -81,7 +81,7 @@ const Analytics = () => {
         </div>
 
         {/* Filter buttons */}
-        <div className="flex bg-white dark:bg-darkCard border border-slate-200/50 dark:border-darkBorder/40 rounded-2xl p-1 shadow-sm self-start">
+        <div className="flex bg-white dark:bg-darkCard border border-slate-200 dark:border-darkBorder rounded-2xl p-1 self-start">
           {['weekly', 'monthly', 'quarterly', 'yearly'].map((filter) => (
             <button
               key={filter}
@@ -104,7 +104,7 @@ const Analytics = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* Chart 1: Income vs Expense comparison (Bar) */}
-          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass">
+          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder">
             <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-6">
               Income vs Expense Comparison
             </h4>
@@ -128,7 +128,7 @@ const Analytics = () => {
           </div>
 
           {/* Chart 2: Category Pie Chart */}
-          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass">
+          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder">
             <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-6">
               Category Expenses Distribution
             </h4>
@@ -179,7 +179,7 @@ const Analytics = () => {
           </div>
 
           {/* Chart 3: Savings Trend (Area) */}
-          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass">
+          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder">
             <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-6">
               Monthly Savings Trend
             </h4>
@@ -189,17 +189,11 @@ const Analytics = () => {
               ) : (
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={analyticsData.monthlyTrend} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-                    <defs>
-                      <linearGradient id="colorSavings" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#2563EB" stopOpacity={0.2}/>
-                        <stop offset="95%" stopColor="#2563EB" stopOpacity={0}/>
-                      </linearGradient>
-                    </defs>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
                     <XAxis dataKey="label" tickLine={false} axisLine={false} style={{ fontSize: 10, fontWeight: 'bold', fill: '#94a3b8' }} />
                     <YAxis tickLine={false} axisLine={false} style={{ fontSize: 10, fontWeight: 'bold', fill: '#94a3b8' }} />
                     <Tooltip content={<CustomTooltip />} />
-                    <Area type="monotone" dataKey="savings" name="Net Savings" stroke="#2563EB" strokeWidth={3} fillOpacity={1} fill="url(#colorSavings)" />
+                    <Area type="monotone" dataKey="savings" name="Net Savings" stroke="#2563EB" strokeWidth={3} fillOpacity={0.15} fill="#2563EB" />
                   </AreaChart>
                 </ResponsiveContainer>
               )}
@@ -207,7 +201,7 @@ const Analytics = () => {
           </div>
 
           {/* Widget 4: Top Spending Categories ranker */}
-          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass flex flex-col justify-between">
+          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder flex flex-col justify-between">
             <div>
               <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-6">
                 Top Spending Categories

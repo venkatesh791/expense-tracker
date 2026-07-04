@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { CurrencyProvider } from './context/CurrencyContext';
+import { ToastProvider } from './context/ToastContext';
 
 // Pages
 import Login from './pages/Login';
@@ -92,13 +93,15 @@ const MainAppContent = () => {
 
 const App = () => {
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <CurrencyProvider>
-          <MainAppContent />
-        </CurrencyProvider>
-      </ThemeProvider>
-    </AuthProvider>
+    <ToastProvider>
+      <AuthProvider>
+        <ThemeProvider>
+          <CurrencyProvider>
+            <MainAppContent />
+          </CurrencyProvider>
+        </ThemeProvider>
+      </AuthProvider>
+    </ToastProvider>
   );
 };
 

@@ -31,7 +31,7 @@ const OnboardingModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-fadeIn">
-      <div className="w-full max-w-lg bg-white dark:bg-darkCard rounded-3xl p-8 border border-slate-200/50 dark:border-darkBorder/30 shadow-2xl relative glass animate-scaleIn">
+      <div className="w-full max-w-lg bg-white dark:bg-darkCard rounded-3xl p-8 border border-slate-200 dark:border-darkBorder relative animate-scaleIn">
         
         <div className="fade-in">
           <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4">
@@ -41,7 +41,7 @@ const OnboardingModal = ({ isOpen, onClose }) => {
           <p className="text-sm text-slate-400 dark:text-slate-500 mb-6 leading-relaxed">
             Let's customize your tracking workspace. What is your preferred base currency? All transactions and widgets will show in this format.
           </p>
-
+ 
           <div className="grid grid-cols-2 gap-3 mb-8">
             {currencies.map((curr) => (
               <button
@@ -50,7 +50,7 @@ const OnboardingModal = ({ isOpen, onClose }) => {
                 onClick={() => setSelectedCurrency(curr)}
                 className={`p-4 rounded-2xl border text-left font-bold text-sm transition-all flex justify-between items-center ${
                   selectedCurrency === curr
-                    ? 'border-primary bg-primary/5 text-primary shadow-sm shadow-primary/10'
+                    ? 'border-primary bg-primary/5 text-primary'
                     : 'border-slate-200 dark:border-darkBorder hover:border-slate-300 dark:hover:border-darkBorder/80 hover:bg-slate-50 dark:hover:bg-slate-800'
                 }`}
               >
@@ -61,11 +61,11 @@ const OnboardingModal = ({ isOpen, onClose }) => {
               </button>
             ))}
           </div>
-
+ 
           <button
             onClick={handleChooseCurrency}
             disabled={loading}
-            className="w-full py-4 bg-primary text-white rounded-2xl font-bold hover:bg-primary-dark shadow-lg shadow-primary/20 transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+            className="w-full py-4 bg-primary text-white rounded-2xl font-bold hover:bg-primary-dark transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
           >
             <span>{loading ? 'Saving Preference...' : 'Choose Currency'}</span>
             {!loading && <ArrowRight size={18} />}

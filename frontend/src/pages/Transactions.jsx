@@ -174,7 +174,7 @@ const Transactions = () => {
           <button
             onClick={handleExportCSV}
             disabled={transactions.length === 0}
-            className="py-2.5 px-4 bg-white dark:bg-darkCard hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-darkBorder rounded-2xl font-bold text-xs flex items-center gap-1.5 shadow-sm disabled:opacity-50 transition-colors"
+            className="py-2.5 px-4 bg-white dark:bg-darkCard hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-darkBorder rounded-2xl font-bold text-xs flex items-center gap-1.5 disabled:opacity-50 transition-colors"
           >
             <FileSpreadsheet size={14} className="text-success" />
             <span>Export CSV</span>
@@ -182,7 +182,7 @@ const Transactions = () => {
           <button
             onClick={handleExportPDF}
             disabled={transactions.length === 0}
-            className="py-2.5 px-4 bg-white dark:bg-darkCard hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-darkBorder rounded-2xl font-bold text-xs flex items-center gap-1.5 shadow-sm disabled:opacity-50 transition-colors"
+            className="py-2.5 px-4 bg-white dark:bg-darkCard hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-darkBorder rounded-2xl font-bold text-xs flex items-center gap-1.5 disabled:opacity-50 transition-colors"
           >
             <FileText size={14} className="text-danger" />
             <span>Export PDF</span>
@@ -191,7 +191,7 @@ const Transactions = () => {
       </div>
 
       {/* Advanced Filters */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 bg-white dark:bg-darkCard p-5 border border-slate-200/50 dark:border-darkBorder/40 rounded-3xl shadow-sm glass">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 bg-white dark:bg-darkCard p-5 border border-slate-200 dark:border-darkBorder rounded-3xl">
         
         {/* Search */}
         <div className="relative">
@@ -255,7 +255,7 @@ const Transactions = () => {
       </div>
 
       {/* Ledger Table */}
-      <div className="bg-white dark:bg-darkCard rounded-3xl border border-slate-200/50 dark:border-darkBorder/40 shadow-sm overflow-hidden glass">
+      <div className="bg-white dark:bg-darkCard rounded-3xl border border-slate-200 dark:border-darkBorder overflow-hidden">
         <div className="overflow-x-auto animate-fadeIn">
           <table className="w-full text-left border-collapse">
             <thead>

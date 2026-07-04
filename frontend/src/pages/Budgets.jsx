@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useCurrency } from '../context/CurrencyContext';
+import { useToast } from '../context/ToastContext';
+import { z } from 'zod';
 import api from '../utils/api';
 import { Calendar, Save, Trash2, ShieldAlert, Sparkles, HelpCircle, Check } from 'lucide-react';
 
+const budgetSchema = z.object({
+  category: z.string().min(1, 'Please select a category'),
+  limit: z.coerce.number().nonnegative('Limit must be greater than or equal to zero'),
+  month: z.string().min(1, 'Please select a month'),
+});
+
 const Budgets = () => {
   const { format, symbol } = useCurrency();
+  const { showToast } = useToast();
   
   // Default month YYYY-MM
   const [month, setMonth] = useState(() => {
@@ -43,8 +52,12 @@ const Budgets = () => {
 
   const handleSaveBudget = async (e) => {
     e.preventDefault();
-    if (!editCategory) return;
-    if (editLimit === '' || editLimit < 0) return;
+    const result = budgetSchema.safeParse({ category: editCategory, limit: editLimit, month });
+    if (!result.success) {
+      const errorMsg = result.error.errors?.[0]?.message || result.error.issues?.[0]?.message || 'Validation failed';
+      showToast(errorMsg, 'error');
+      return;
+    }
 
     setSyncStatus('saving');
     try {
@@ -119,7 +132,7 @@ const Budgets = () => {
             type="month"
             value={month}
             onChange={(e) => setMonth(e.target.value)}
-            className="pl-9 pr-4 py-2.5 rounded-2xl border border-slate-200 dark:border-darkBorder bg-white dark:bg-darkCard text-xs font-bold focus:outline-none shadow-sm cursor-pointer"
+            className="pl-9 pr-4 py-2.5 rounded-2xl border border-slate-200 dark:border-darkBorder bg-white dark:bg-darkCard text-xs font-bold focus:outline-none cursor-pointer"
           />
         </div>
       </div>
@@ -128,7 +141,7 @@ const Budgets = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* Set Budget Form (1/3 column) */}
-        <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass h-fit">
+        <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder h-fit">
           <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-6 flex items-center gap-1.5">
             <Sparkles size={16} className="text-primary" />
             Set Category Limits
@@ -172,7 +185,7 @@ const Budgets = () => {
             <button
               type="submit"
               disabled={syncStatus === 'saving'}
-              className="w-full py-3.5 bg-primary text-white rounded-xl font-bold hover:bg-primary-dark shadow-md shadow-primary/25 transition-all flex items-center justify-center gap-2"
+              className="w-full py-3.5 bg-primary text-white rounded-xl font-bold hover:bg-primary-dark transition-all flex items-center justify-center gap-2"
             >
               <Save size={16} />
               <span>{syncStatus === 'saving' ? 'Saving Limit...' : 'Save Limit'}</span>
@@ -187,7 +200,7 @@ const Budgets = () => {
         </div>
 
         {/* Categories budget progress list (2/3 columns) */}
-        <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass lg:col-span-2 space-y-6">
+        <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder lg:col-span-2 space-y-6">
           <div>
             <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider">
               Budget Spending Tracker

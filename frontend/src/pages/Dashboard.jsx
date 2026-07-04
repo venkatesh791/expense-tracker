@@ -128,7 +128,7 @@ const Dashboard = ({ setActivePage }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* Budget utilization widget */}
-        <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass flex flex-col justify-between">
+        <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center mb-4">
               <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider">
@@ -190,7 +190,7 @@ const Dashboard = ({ setActivePage }) => {
         </div>
 
         {/* AI smart Insights (middle widget) */}
-        <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass lg:col-span-2 flex flex-col justify-between">
+        <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder lg:col-span-2 flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center mb-6">
               <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider flex items-center gap-1.5">
@@ -217,7 +217,7 @@ const Dashboard = ({ setActivePage }) => {
                     <div className="mt-0.5">{getInsightIcon(insight.type)}</div>
                     <div>
                       <strong className="block font-bold text-slate-800 dark:text-white mb-0.5">{insight.title}</strong>
-                      <span dangerouslySetInnerHTML={{ __html: insight.message }} />
+                      <span dangerouslySetInnerHTML={{ __html: insight.message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                     </div>
                   </div>
                 ))
@@ -239,7 +239,7 @@ const Dashboard = ({ setActivePage }) => {
       </div>
 
       {/* Recent Transactions List */}
-      <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass">
+      <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder">
         <div className="flex justify-between items-center mb-6">
           <div>
             <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider">

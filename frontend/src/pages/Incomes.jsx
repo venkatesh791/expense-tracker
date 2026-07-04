@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useCurrency } from '../context/CurrencyContext';
+import { useToast } from '../context/ToastContext';
+import { z } from 'zod';
 import api from '../utils/api';
 import { Plus, Edit2, Trash2, ArrowUpRight, Search, Calendar, Tag, FileText, X } from 'lucide-react';
 
+const incomeSchema = z.object({
+  amount: z.coerce.number().positive('Amount must be greater than zero'),
+  category: z.string().min(1, 'Please select a category'),
+  date: z.string().min(1, 'Please select a date'),
+  description: z.string().optional(),
+});
+
 const Incomes = () => {
   const { format, symbol } = useCurrency();
+  const { showToast } = useToast();
   const [incomes, setIncomes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -82,16 +92,11 @@ const Incomes = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    if (!amount || amount <= 0) {
-      setFormError('Amount must be greater than zero');
-      return;
-    }
-    if (!category) {
-      setFormError('Please select a category');
-      return;
-    }
-    if (!date) {
-      setFormError('Please select a date');
+    const result = incomeSchema.safeParse({ amount, category, date, description });
+    if (!result.success) {
+      const errorMsg = result.error.errors?.[0]?.message || result.error.issues?.[0]?.message || 'Validation failed';
+      setFormError(errorMsg);
+      showToast(errorMsg, 'error');
       return;
     }
 
@@ -121,7 +126,7 @@ const Incomes = () => {
         </div>
         <button
           onClick={handleOpenAdd}
-          className="py-3 px-5 bg-success text-white rounded-2xl font-bold hover:bg-success-dark shadow-md shadow-success/20 transition-all flex items-center justify-center gap-1.5 self-start"
+          className="py-3 px-5 bg-success text-white rounded-2xl font-bold hover:bg-success-dark transition-all flex items-center justify-center gap-1.5 self-start"
         >
           <Plus size={16} />
           <span>Add Income</span>
@@ -137,14 +142,14 @@ const Incomes = () => {
             placeholder="Search description..."
             value={search}
             onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-            className="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-darkBorder bg-white dark:bg-darkCard focus:border-primary focus:outline-none text-sm font-semibold transition-colors shadow-sm"
+            className="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-darkBorder bg-white dark:bg-darkCard focus:border-primary focus:outline-none text-sm font-semibold transition-colors"
           />
         </div>
 
         <select
           value={categoryFilter}
           onChange={(e) => { setCategoryFilter(e.target.value); setPage(1); }}
-          className="py-3 px-4 rounded-2xl border border-slate-200 dark:border-darkBorder bg-white dark:bg-darkCard focus:border-primary focus:outline-none text-sm font-semibold shadow-sm"
+          className="py-3 px-4 rounded-2xl border border-slate-200 dark:border-darkBorder bg-white dark:bg-darkCard focus:border-primary focus:outline-none text-sm font-semibold"
         >
           <option value="">All Categories</option>
           {categories.map(cat => (
@@ -158,7 +163,7 @@ const Incomes = () => {
       </div>
 
       {/* Incomes table/list */}
-      <div className="bg-white dark:bg-darkCard rounded-3xl border border-slate-200/50 dark:border-darkBorder/40 shadow-sm overflow-hidden glass">
+      <div className="bg-white dark:bg-darkCard rounded-3xl border border-slate-200 dark:border-darkBorder overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -250,7 +255,7 @@ const Incomes = () => {
       {/* CRUD Form Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
-          <div className="w-full max-w-md bg-white dark:bg-darkCard rounded-3xl p-6 border border-slate-200/50 dark:border-darkBorder/30 shadow-2xl glass relative">
+          <div className="w-full max-w-md bg-white dark:bg-darkCard rounded-3xl p-6 border border-slate-200 dark:border-darkBorder relative">
             <div className="flex justify-between items-center mb-6">
               <h4 className="font-extrabold text-lg">
                 {isEditMode ? 'Edit Income Entry' : 'Add Income Entry'}
@@ -340,7 +345,7 @@ const Incomes = () => {
 
               <button
                 type="submit"
-                className="w-full py-3.5 bg-success text-white rounded-xl font-bold hover:bg-success-dark shadow-md shadow-success/15 transition-all flex items-center justify-center"
+                className="w-full py-3.5 bg-success text-white rounded-xl font-bold hover:bg-success-dark transition-all flex items-center justify-center border border-success-dark"
               >
                 <span>{isEditMode ? 'Update Income' : 'Save Income'}</span>
               </button>

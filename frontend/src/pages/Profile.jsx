@@ -2,12 +2,24 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useTheme } from '../context/ThemeContext';
+import { useToast } from '../context/ToastContext';
+import { z } from 'zod';
 import { User, Mail, Shield, Check, Palette, Sparkles, KeyRound } from 'lucide-react';
+
+const profileSchema = z.object({
+  name: z.string().min(1, 'Full name is required').max(50, 'Name must be under 50 characters'),
+  profileImage: z.string().url('Invalid avatar URL').or(z.string().length(0)).optional(),
+});
+
+const passwordSchema = z.object({
+  password: z.string().min(6, 'New password must be at least 6 characters long'),
+});
 
 const Profile = () => {
   const { user, updateProfile } = useAuth();
   const { currency, changeCurrency } = useCurrency();
   const { theme, toggleTheme } = useTheme();
+  const { showToast } = useToast();
 
   const [name, setName] = useState(user?.name || '');
   const [profileImage, setProfileImage] = useState(user?.profileImage || '');
@@ -23,7 +35,15 @@ const Profile = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    if (!name) return;
+    
+    // Zod validation
+    const result = profileSchema.safeParse({ name, profileImage });
+    if (!result.success) {
+      const errorMsg = result.error.errors?.[0]?.message || result.error.issues?.[0]?.message || 'Validation failed';
+      setError(errorMsg);
+      showToast(errorMsg, 'error');
+      return;
+    }
 
     setSaveStatus('saving');
     setError('');
@@ -39,8 +59,13 @@ const Profile = () => {
 
   const handlePasswordChange = async (e) => {
     e.preventDefault();
-    if (!newPassword || newPassword.length < 6) {
-      setError('New password must be at least 6 characters long');
+    
+    // Zod validation
+    const result = passwordSchema.safeParse({ password: newPassword });
+    if (!result.success) {
+      const errorMsg = result.error.errors?.[0]?.message || result.error.issues?.[0]?.message || 'Validation failed';
+      setError(errorMsg);
+      showToast(errorMsg, 'error');
       return;
     }
 
@@ -79,7 +104,7 @@ const Profile = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         {/* Profile Card & Avatar picker */}
-        <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass flex flex-col items-center justify-between h-fit text-center">
+        <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder flex flex-col items-center justify-between h-fit text-center">
           <div className="w-full flex flex-col items-center">
             <div className="relative mb-4">
               <img
@@ -87,7 +112,7 @@ const Profile = () => {
                 alt="Avatar"
                 className="w-24 h-24 rounded-full border-4 border-slate-100 dark:border-darkBorder bg-slate-100 object-cover"
               />
-              <div className="absolute bottom-0 right-0 p-1.5 rounded-full bg-primary text-white shadow-md">
+              <div className="absolute bottom-0 right-0 p-1.5 rounded-full bg-primary text-white border border-slate-700">
                 <Sparkles size={14} />
               </div>
             </div>
@@ -124,7 +149,7 @@ const Profile = () => {
         <div className="md:col-span-2 space-y-6">
           
           {/* General Profile fields */}
-          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass">
+          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder">
             <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-6 flex items-center gap-1.5">
               <User size={16} className="text-primary" />
               Personal Details
@@ -161,7 +186,7 @@ const Profile = () => {
                 <button
                   type="submit"
                   disabled={saveStatus === 'saving'}
-                  className="py-3 px-5 bg-primary text-white rounded-xl font-bold hover:bg-primary-dark shadow-md shadow-primary/20 transition-all flex items-center gap-1.5"
+                  className="py-3 px-5 bg-primary text-white rounded-xl font-bold hover:bg-primary-dark transition-all flex items-center gap-1.5"
                 >
                   {saveStatus === 'saving' ? 'Saving Details...' : 'Save Profile Changes'}
                 </button>
@@ -175,7 +200,7 @@ const Profile = () => {
           </div>
 
           {/* Preferences Settings (theme & currency) */}
-          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass">
+          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder">
             <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-6 flex items-center gap-1.5">
               <Palette size={16} className="text-primary" />
               Workspace Preferences
@@ -214,7 +239,7 @@ const Profile = () => {
           </div>
 
           {/* Security details (Password change) */}
-          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200/50 dark:border-darkBorder/40 shadow-sm glass">
+          <div className="rounded-3xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder">
             <h4 className="font-extrabold text-sm uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-6 flex items-center gap-1.5">
               <KeyRound size={16} className="text-primary" />
               Change Security Password

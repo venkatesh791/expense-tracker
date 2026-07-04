@@ -3,7 +3,7 @@ import React from 'react';
 const StatCard = ({ title, value, icon: Icon, description, trend, trendType, loading }) => {
   if (loading) {
     return (
-      <div className="rounded-2xl bg-white dark:bg-darkCard p-6 border border-slate-200/60 dark:border-darkBorder/40 shadow-sm shimmer h-32 flex flex-col justify-between">
+      <div className="rounded-2xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder shimmer h-32 flex flex-col justify-between">
         <div className="h-4 w-1/3 bg-slate-200 dark:bg-slate-700 rounded"></div>
         <div className="h-8 w-2/3 bg-slate-200 dark:bg-slate-700 rounded"></div>
       </div>
@@ -17,7 +17,7 @@ const StatCard = ({ title, value, icon: Icon, description, trend, trendType, loa
   };
 
   return (
-    <div className="rounded-2xl bg-white dark:bg-darkCard p-6 border border-slate-200/60 dark:border-darkBorder/40 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden glass group fade-in">
+    <div className="rounded-2xl bg-white dark:bg-darkCard p-6 border border-slate-200 dark:border-darkBorder transition-colors relative overflow-hidden group fade-in">
       <div className="flex justify-between items-start">
         <div>
           <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">

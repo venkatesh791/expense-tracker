@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { triggerExternalToast } from '../context/ToastContext';
 
 let baseURL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5001/api');
 
@@ -51,6 +52,11 @@ api.interceptors.response.use(
   },
   (error) => {
     const response = error.response;
+    const errorMessage = response?.data?.message || error.message || 'An error occurred';
+    
+    // Display API errors in a toast notification
+    triggerExternalToast(errorMessage, 'error');
+
     console.error(
       `%c[API Response Error] ${error.config?.method?.toUpperCase()} ${error.config?.url} - Status ${response?.status || 'Unknown'}`,
       'color: #f44336; font-weight: bold;',
